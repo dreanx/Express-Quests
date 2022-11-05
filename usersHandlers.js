@@ -1,17 +1,19 @@
 const database = require("./database");
 
-
 //GET (select / read)
 const getUsers = (req, res) => {
   let sql = "select * from users";
   let sqlValues = [];
 
-  if(req.query.language != null) {
+  if (req.query.language != null) {
     sql += " where language = ?";
     sqlValues.push(req.query.language);
-  }
 
-  if(req.query.city != null) {
+    if (req.query.city != null) {
+      sql += " and city = ?";
+      sqlValues.push(req.query.city);
+    }
+  } else if (req.query.city != null) {
     sql += " where city = ?";
     sqlValues.push(req.query.city);
   }
@@ -45,7 +47,6 @@ const getUsersById = (req, res) => {
     });
 };
 
-
 //POST (insert)
 const postUsers = (req, res) => {
   const { firstname, lastname, email, city, language } = req.body;
@@ -62,7 +63,6 @@ const postUsers = (req, res) => {
       res.status(500).send("Error saving the movie");
     });
 };
-
 
 //PUT (update)
 const updateUsers = (req, res) => {
@@ -87,7 +87,6 @@ const updateUsers = (req, res) => {
     });
 };
 
-
 //DELETE (delete)
 const deleteUsers = (req, res) => {
   const id = parseInt(req.params.id);
@@ -106,7 +105,6 @@ const deleteUsers = (req, res) => {
       res.status(500).send("Error deleting the movie");
     });
 };
-
 
 module.exports = {
   getUsers,
