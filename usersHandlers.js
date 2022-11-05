@@ -32,6 +32,7 @@ const getUsersById = (req, res) => {
     });
 };
 
+
 //POST
 const postUsers = (req, res) => {
   const { firstname, lastname, email, city, language } = req.body;
