@@ -60,7 +60,7 @@ const postUsers = (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).send("Error saving the movie");
+      res.status(500).send("Error saving the user");
     });
 };
 
@@ -83,7 +83,7 @@ const updateUsers = (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).send("Error editing the movie");
+      res.status(500).send("Error editing the user");
     });
 };
 
@@ -102,7 +102,7 @@ const deleteUsers = (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).send("Error deleting the movie");
+      res.status(500).send("Error deleting the user");
     });
 };
 
