@@ -1,7 +1,7 @@
 const database = require("./database");
 
 
-//GET
+//GET (select)
 const getMovies = (req, res) => {
   database
     .query("select * from movies")
@@ -33,7 +33,7 @@ const getMovieById = (req, res) => {
 };
 
 
-//POST
+//POST (insert)
 const postMovie = (req, res) => {
   const { title, director, year, color, duration } = req.body;
   database
@@ -51,7 +51,7 @@ const postMovie = (req, res) => {
 };
 
 
-//PUT
+//PUT (update)
 const updateMovie = (req, res) => {
   const id = parseInt(req.params.id);
   const { title, director, year, color, duration } = req.body;
@@ -75,7 +75,7 @@ const updateMovie = (req, res) => {
 };
 
 
-//DELETE
+//DELETE (delete)
 const deleteMovie = (req, res) => {
   const id = parseInt(req.params.id);
 

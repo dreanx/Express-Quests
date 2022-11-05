@@ -1,7 +1,7 @@
 const database = require("./database");
 
 
-//GET
+//GET (select)
 const getUsers = (req, res) => {
   database
     .query("select * from users")
@@ -33,7 +33,7 @@ const getUsersById = (req, res) => {
 };
 
 
-//POST
+//POST (insert)
 const postUsers = (req, res) => {
   const { firstname, lastname, email, city, language } = req.body;
   database
@@ -51,7 +51,7 @@ const postUsers = (req, res) => {
 };
 
 
-//PUT
+//PUT (update)
 const updateUsers = (req, res) => {
   const id = parseInt(req.params.id);
   const { firstname, lastname, email, city, language } = req.body;
@@ -75,7 +75,7 @@ const updateUsers = (req, res) => {
 };
 
 
-//DELETE
+//DELETE (delete)
 const deleteUsers = (req, res) => {
   const id = parseInt(req.params.id);
 
