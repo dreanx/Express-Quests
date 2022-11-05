@@ -34,7 +34,7 @@ const getUsersById = (req, res) => {
 
 //POST
 const postUsers = (req, res) => {
-  const { title, director, year, color, duration } = req.body;
+  const { firstname, lastname, email, city, language } = req.body;
   database
     .query(
       "INSERT INTO users(firstname, lastname, email, city, language) VALUES (?, ?, ?, ?, ?)",
