@@ -1,10 +1,25 @@
 const database = require("./database");
 
-
-//GET (select)
+//GET (select / read)
 const getMovies = (req, res) => {
+  let sql = "select * from movies";
+  let sqlValues = [];
+
+  if (req.query.color != null) {
+    sql += " where color = ?";
+    sqlValues.push(req.query.color);
+
+    if (req.query.maxx_duration != null) {
+      sql += " and duration <= ?";
+      sqlValues.push(req.query.maxx_duration);
+    }
+  } else if (req.query.maxx_duration != null) {
+    sql += " where duration <= ?";
+    sqlValues.push(req.query.maxx_duration);
+  }
+
   database
-    .query("select * from movies")
+    .query(sql, sqlValues)
     .then(([movies]) => {
       res.json(movies);
     })
@@ -32,7 +47,6 @@ const getMovieById = (req, res) => {
     });
 };
 
-
 //POST (insert)
 const postMovie = (req, res) => {
   const { title, director, year, color, duration } = req.body;
@@ -49,7 +63,6 @@ const postMovie = (req, res) => {
       res.status(500).send("Error saving the movie");
     });
 };
-
 
 //PUT (update)
 const updateMovie = (req, res) => {
@@ -74,7 +87,6 @@ const updateMovie = (req, res) => {
     });
 };
 
-
 //DELETE (delete)
 const deleteMovie = (req, res) => {
   const id = parseInt(req.params.id);
@@ -93,7 +105,6 @@ const deleteMovie = (req, res) => {
       res.status(500).send("Error deleting the movie");
     });
 };
-
 
 module.exports = {
   getMovies,
