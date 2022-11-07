@@ -1,12 +1,13 @@
-const express = require("express");
+const express = require("express");  // We import express
 require("dotenv").config();
 
-const app = express();
+const app = express(); // Create an application by calling the express module
+// Now, we have access to a lot of express methods using app.METHOD (ex: app.get(), app.post(), etc...)
 
 
 app.use(express.json());
 
-const port = process.env.APP_PORT ?? 5000;
+const port = process.env.APP_PORT ?? 5000; //Create a constant to store the port number.
 
 const welcome = (req, res) => {
   res.send("Welcome to my favourite movie list");
