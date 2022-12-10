@@ -7,6 +7,8 @@ const hashingOptions = {
   parallelism: 1,
 };
 
+
+//Hashing a given password:
 const hashPassword = (req, res, next) => {
   argon2
     .hash(req.body.password, hashingOptions)
@@ -24,6 +26,26 @@ const hashPassword = (req, res, next) => {
     });
 };
 
+
+//verifying the password matches the hashed version in the database for a given email
+const verifyPassword = (req, res) => {
+    argon2
+      .verify(req.user.hashedPassword, req.body.password)
+      .then((isVerified) => {
+        if (isVerified) {
+          res.send("Credentials are valid, you are logged in");
+        } else {
+          res.status(401).send("Wrong Password");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        res.SendStatus(500);
+      });
+  };
+  
+
 module.exports = {
   hashPassword,
+  verifyPassword
 };
