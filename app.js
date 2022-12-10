@@ -29,7 +29,11 @@ app.get("/api/users/:id", usersHandlers.getUsersById);
 const { validateMovie } = require("./validators.js");
 app.post("/api/movies", validateMovie, movieHandlers.postMovie);
 const { validateUser } = require("./validators.js");
-app.post("/api/users", validateUser, usersHandlers.postUsers);
+const { hashPassword } = require("./auth.js");
+app.post("/api/users", validateUser, hashPassword, usersHandlers.postUsers);
+
+
+
 
 //PUT
 app.put("/api/movies/:id", movieHandlers.updateMovie);
