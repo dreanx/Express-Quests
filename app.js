@@ -5,7 +5,7 @@ const app = express(); // Create an application by calling the express module
 // Now, we have access to a lot of express methods using app.METHOD (ex: app.get(), app.post(), etc...)
 
 //Importing the hasing and the verification for our login post 
-const { hashPassword, verifyPassword } = require("./auth.js");
+const { hashPassword, verifyPassword, verifyToken } = require("./auth.js");
 
 app.use(express.json());
 
@@ -21,22 +21,9 @@ const movieHandlers = require("./movieHandlers");
 const usersHandlers = require("./usersHandlers");
 
 
-//LOGIN
 
-// const isItGrumpy = (req, res) => {
-//   if (req.body.email === "grumpy@cat.com" && req.body.password === "grumps") {
-//     res.send("Credentials are valid, Welcome Grumpy Cat");
-//   } else {
-//     res.sendStatus(401);
-//   }
-// };
-// app.post("/api/login", isItGrumpy);
-app.post(
-  "/api/login",
-  usersHandlers.getUserByEmailWithPasswordAndPassToNext,
-  verifyPassword
-);
 
+    //PUBLIC ROUTES
 
 //GET
 app.get("/api/movies", movieHandlers.getMovies);
@@ -45,9 +32,20 @@ app.get("/api/movies/:id", movieHandlers.getMovieById);
 app.get("/api/users", usersHandlers.getUsers);
 app.get("/api/users/:id", usersHandlers.getUsersById);
 
+//LOGIN
+app.post(
+  "/api/login",
+  usersHandlers.getUserByEmailWithPasswordAndPassToNext,
+  verifyPassword
+);
+
+    //PROTECTED ROUTES (every routes after the next line is protected)
+    app.use(verifyToken);
+
 //POST (with Validation)
 const { validateMovie } = require("./validators.js");
 app.post("/api/movies", validateMovie, movieHandlers.postMovie);
+//POST (with validation, and hashing the password provided by the user)
 const { validateUser } = require("./validators.js");
 app.post("/api/users", validateUser, hashPassword, usersHandlers.postUsers);
 
