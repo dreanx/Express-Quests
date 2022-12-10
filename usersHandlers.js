@@ -1,3 +1,5 @@
+// Routes related to users should not return any sensitive information (beware of SELECT * ... !)
+
 const { hashPassword } = require("./auth");
 const database = require("./database");
 
