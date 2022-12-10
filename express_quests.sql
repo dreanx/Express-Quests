@@ -57,15 +57,6 @@ VALUES
 
 DROP TABLE IF EXISTS users;
 
-CREATE TABLE users (
-    id int primary key NOT NULL AUTO_INCREMENT,
-    firstname varchar(255) NOT NULL,
-    lastname varchar(255) NOT NULL,
-    email varchar(255) UNIQUE NOT NULL,
-    city varchar(255) DEFAULT NULL,
-    language varchar(255) DEFAULT NULL,
-    hashedPassword varchar(255) NOT NULL
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 CREATE TABLE users (
     id int primary key NOT NULL AUTO_INCREMENT,

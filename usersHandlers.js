@@ -1,3 +1,4 @@
+const { hashPassword } = require("./auth");
 const database = require("./database");
 
 //GET (select / read)
@@ -49,7 +50,8 @@ const getUsersById = (req, res) => {
 
 //POST (insert)
 const postUsers = (req, res) => {
-  const { firstname, lastname, email, city, language, hashedPassword } = req.body;
+  const { firstname, lastname, email, city, language, hashedPassword} = req.body;
+  console.log(hashedPassword);
   database
     .query(
       "INSERT INTO users(firstname, lastname, email, city, language, hashedPassword) VALUES (?, ?, ?, ?, ?, ?)",
