@@ -45,7 +45,7 @@ app.post(
 //POST (with Validation)
 const { validateMovie } = require("./validators.js");
 app.post("/api/movies", validateMovie, movieHandlers.postMovie);
-//POST (with validation, and hashing the password provided by the user)
+//POST (with validation, and hashing the password provided by the user with a middleware)
 const { validateUser } = require("./validators.js");
 app.post("/api/users", validateUser, hashPassword, usersHandlers.postUsers);
 

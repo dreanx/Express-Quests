@@ -9,7 +9,7 @@ const hashingOptions = {
 };
 
 
-//Hashing a given password:
+//Hashing a given password (middleware)
 const hashPassword = (req, res, next) => {
   argon2
     .hash(req.body.password, hashingOptions)
