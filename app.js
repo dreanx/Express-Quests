@@ -4,7 +4,7 @@ require("dotenv").config();
 const app = express(); // Create an application by calling the express module
 // Now, we have access to a lot of express methods using app.METHOD (ex: app.get(), app.post(), etc...)
 
-//Importing the hasing and the verification for our login post 
+//Importing the modules
 const { hashPassword, verifyPassword, verifyToken } = require("./auth.js");
 
 app.use(express.json());
@@ -23,7 +23,7 @@ const usersHandlers = require("./usersHandlers");
 
 
 
-    //PUBLIC ROUTES
+    //?PUBLIC ROUTES
 
 //GET
 app.get("/api/movies", movieHandlers.getMovies);
@@ -39,7 +39,7 @@ app.post(
   verifyPassword
 );
 
-    //PROTECTED ROUTES (every routes after the next line is protected)
+    //!PROTECTED ROUTES (every routes after the next line is protected)
     app.use(verifyToken);
 
 //POST (with Validation)

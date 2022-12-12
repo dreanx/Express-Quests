@@ -53,7 +53,7 @@ const verifyPassword = (req, res) => {
   };
   
 
-//Token Verification
+//Token Verification (generates a token (populate in the OAuth in Auth))
 const verifyToken = (req, res, next) => {
     try {
       const authorizationHeader = req.get("Authorization");
@@ -76,7 +76,7 @@ const verifyToken = (req, res, next) => {
       res.sendStatus(401);
     }
   };
-  
+
 
 module.exports = {
   hashPassword,
